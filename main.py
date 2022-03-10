@@ -1,8 +1,19 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from scraper import Scraper
 
 app = FastAPI()
 wallpapers_scraper = Scraper()
+
+# Handelling CORS
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get('/')
 def get_all():
